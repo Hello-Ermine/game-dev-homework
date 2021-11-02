@@ -1,6 +1,6 @@
 import Phaser from "phaser";
 
-let fox;
+let doraemon;
 
 class GameScene extends Phaser.Scene {
     constructor(test) {
@@ -10,30 +10,31 @@ class GameScene extends Phaser.Scene {
     }
 
     preload() {
-        this.load.spritesheet('fox', 'src/image/fox/playerFox.png',
-                                { frameWidth: 500, frameHeight: 300 });
+        this.load.spritesheet('playerdoraemon', 'src/image/playerDoreamon.png',
+                                { frameWidth: 300, frameHeight: 500 });
 
     }
 
     create() {
-        fox = this.physic.add.sprite(200, 500, 'fox').setScale(0.5).setOffset(0, 0);
+        doraemon = this.physic.add.sprite(0, 0, 'playerdoraemon').setScale(0.5).setOffset(0,0);
 
-        this.anims.create({
-            key: 'foxAni',
-            frames: this.anims.generateFrameNumbers('fox',{
-                start: 0,
-                end: 7
-            }),
-            duration: 500,
-            repeat: -1
-        })
+    //     this.anims.create({
+    //         key: 'doraemonAni',
+    //         frames: this.anims.generateFrameNumbers('playerdoraemon',{
+    //             start: 0,
+    //             end: 5
+    //         }),
+    //         duration: 500,
+    //         repeat: -1
+    //     })
         
-        fox.setCollideWorldBounds(true)
+    //     doraemon.setCollideWorldBounds(true)
         
-    }
+    // }
 
-    update(delta, time) {
-        fox.anims.play('foxAni', true);
+    // update(delta, time) {
+    //     doraemon.anims.play('doraemonAni', true);
+    // 
     }
 }
 export default GameScene;
