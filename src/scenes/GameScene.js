@@ -22,8 +22,9 @@ class GameScene extends Phaser.Scene {
     }
 
     create() {
-        background = this.add.tileSprite(0, 0, 450, 640, 'bg').setOrigin(0, 0);
-        rabbit = this.add.sprite(100, 500, 'rabbit').setScale(0.5).setDepth(99);
+        background = this.add.tileSprite(0, 0, 1280, 640, 'bg').setDepth(1);
+        background.setOrigin(0, 0);
+        rabbit = this.add.sprite(100, 500, 'rabbit').setScale(0.5).setDepth(10);
         this.anims.create({
             key: 'rabbitAni',
             frames: this.anims.generateFrameNumbers('rabbit', {
@@ -36,7 +37,7 @@ class GameScene extends Phaser.Scene {
         })
         
         rabbit.anims.play('rabbitAni', true);
-        // rabbit.setCollideWorldBounds(true)
+        
         // keyW = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.W);
         // keyA = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.A);
         // keyS = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.S);
