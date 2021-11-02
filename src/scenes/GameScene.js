@@ -12,7 +12,7 @@ class GameScene extends Phaser.Scene {
 
     preload() {
         this.load.image('bg','src/images/background-game-png-2.png');
-        this.load.image('wolf','src/images/wolf.png',{ framewidth : 225, framheight : 400});
+        this.load.image('wolf','src/images/wolf.png',{ frameWidth : 160, framHeight : 799});
 
     }
 
@@ -23,7 +23,7 @@ class GameScene extends Phaser.Scene {
             key: 'wolfAni',
             frames: this.anims.generateFrameNumbers('wolf', {
                 start: 0,
-                end: 9
+                end: 4
             }),
             duration: 1000,
             framerate: 0,
