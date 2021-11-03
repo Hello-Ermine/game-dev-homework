@@ -1,6 +1,6 @@
 import Phaser from "phaser";
 
-let bg, player;
+let mainbg, player;
 let keyA, keyD, keyVis;
 
 class GameScene extends Phaser.Scene {
@@ -11,19 +11,18 @@ class GameScene extends Phaser.Scene {
     }
 
     preload() {
-        this.load.image('bg', 'src/image/bg1.jpg');
+        this.load.image('mainbg', 'src/image/BackG.jpg');
         this.load.spritesheet('player', 'src/image/player1.png', { frameWidth: 180, frameHeight: 247 });
     }
 
     create() {
         //BackG
-        bg = this.add.tileSprite(0, -100, 1980, 1080, 'bg')
-            .setDepth(1)
-            .setScale(0.8)
-            .setOrigin(0, 0);
+        mainbg = this.add.tileSprite(0,0, 1024, 510,'mainbg')
+            .setScale(1.35)
+            .setOrigin(0,0);
 
         //Player
-        player = this.physics.add.sprite(120, 570, 'player')
+        player = this.physics.add.sprite(120, 500, 'player')
             .setDepth(10)
             .setScale(0.8);
 
@@ -32,9 +31,9 @@ class GameScene extends Phaser.Scene {
             key: 'playerrun',
             frames: this.anims.generateFrameNumbers('player', {
                 start: 0,
-                end: 6
+                end: 4
             }),
-            duration: 1000,
+            duration: 500,
             framerate: 0,
             repeat: -1
         })
@@ -47,10 +46,10 @@ class GameScene extends Phaser.Scene {
     }
 
     update(delta, time) {
-        bg.tilePositionX += 4;
+        mainbg.tilePositionX += 3;
         //Key A D STOP
-        if (keyA.isDown) {player.setVelocityX(-180);}
-        else if (keyD.isDown) {player.setVelocityX(240);}
+        if (keyA.isDown) {player.setVelocityX(-200);}
+        else if (keyD.isDown) {player.setVelocityX(300);}
         else {player.setVelocityX(0);}
         
         //Anims
