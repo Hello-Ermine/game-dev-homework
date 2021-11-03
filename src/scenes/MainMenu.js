@@ -1,7 +1,8 @@
 import Phaser from "phaser";
 
 
-let buttonPlay;
+let buttonStart;
+let bg;
 
 class MainMenu extends Phaser.Scene {
     constructor(test) {
@@ -11,21 +12,23 @@ class MainMenu extends Phaser.Scene {
     }
 
     preload() {
-        this.load.image('play','src/image/input/play.png')
-        
+        this.load.image('start','src/image/Start.png');
+        this.load.image('bg','src/image/BG.jpg');
     }
 
     create() {
-        buttonPlay = this.add.image(250,300, 'play').setScale(0.2);
-        buttonPlay.setInteractive();
+        buttonStart = this.add.image(500,300, 'start').setScale(0.5).setDepth(5);
+        buttonStart.setInteractive();
 
-        buttonPlay.on('pointerup', ()=>{
+        buttonStart.on('pointerup', ()=>{
             this.scene.start('GameScene');
         })
+
+        bg = this.add.tileSprite(0,0,1000,720,'bg').setOrigin(0,0).setDepth(1);
     }
 
     update(delta, time) {
-        
+        bg.tilePositionX += 2;
     }
 }
 export default MainMenu;
