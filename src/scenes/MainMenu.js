@@ -10,11 +10,11 @@ class MainMenu extends Phaser.Scene {
         });
     }
     preload() {
-        this.load.image('play', 'src/image/cherry.png');
+        this.load.image('play', 'src/image/pancake.png');
 
     }
     create() {
-        buttonPlay = this.add.image(232,350, 'play').setScale(0.2);
+        buttonPlay = this.add.image(232,350, 'play').setScale(0.7);
         buttonPlay.setInteractive();
 
         buttonPlay.on('pointerup', ()=>{
