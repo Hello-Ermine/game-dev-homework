@@ -7,7 +7,7 @@ let snow;
 let keyA;
 let keyD;
 let queen;
-
+let music;
 
 
 
@@ -19,15 +19,12 @@ class GameScene extends Phaser.Scene {
     }
 
     preload() {
-        
+        this.load.audio('theme','src/themesong.mp3');
         this.load.image('bg','src/images/bg05.png');
         this.load.image('cloud1','src/images/layers/clouds_1.png');
         this.load.image('cloud2','src/images/layers/clouds_2.png');
         this.load.image('snow','src/images/layers/snowfalling.png');
         this.load.spritesheet('queen','src/images/spritesheet (5).png',{frameWidth: 382, frameHeight : 382});
-
-        //this.load.spritesheet('cha1','src/images/c2-1.png',{ frameWidth :64, frameHeight :127});
-        
 
     
     }
@@ -83,7 +80,9 @@ class GameScene extends Phaser.Scene {
         
         queen.setCollideWorldBounds(true);
 
-        
+        music = this.sound.add('theme').setVolume(1);
+
+        music.play({loop: true});
         
         keyA = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.A);
         keyD = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.D);
