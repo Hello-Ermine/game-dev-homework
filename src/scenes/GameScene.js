@@ -23,8 +23,9 @@ class GameScene extends Phaser.Scene {
     }
 
     create() {
-        // bg = this.add.image(0,360, 'bg').setScale(0.68);yarn
-        bg = this.add.tileSprite(0,0,450,720, 'bg').setOrigin(0.0);
+        // bg = this.add.image(0,360, 'bg').setScale(0.68);
+        bg = this.add.tileSprite(0,0,1599,1066, 'bg').setOrigin(0.0).setScale(0.69);
+        // bg = this.add.tileSprite(0,0,450,720, 'bg').setScale(1);
         bear = this.physics.add.sprite(220, 500, 'bear').setScale(0.95);
 
 
@@ -35,7 +36,7 @@ class GameScene extends Phaser.Scene {
                 end: 7
             }),
             duration: 1000,
-            repeat:-1
+            repeat: -1
         })
         bear.anims.play('bearAni',true);
 
@@ -57,7 +58,7 @@ class GameScene extends Phaser.Scene {
 
 
     update(delta, time) {
-        bg.tilePositionX += 4;
+        bg.tilePositionX += 6;
         if(cursor.up.isDown){
             bear.setVelocityY(-500);
         }else if(cursor.down.isDown){
