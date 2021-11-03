@@ -9,11 +9,11 @@ class MainMenu extends Phaser.Scene {
     }
 
     preload() {
-        this.load.image('play', 'src/image/play.png');
+        this.load.image('play', 'src/image/start.png');
     }
 
     create() {
-        buttonPlay = this.add.image(540,360, 'play').setScale(1);
+        buttonPlay = this.add.image(540,360, 'play').setScale(1.5);
         buttonPlay.setInteractive();
         buttonPlay.on('pointerup', ()=>{
             this.scene.start('GameScene');

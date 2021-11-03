@@ -1,7 +1,7 @@
 import Phaser from "phaser";
 
 let bg, player;
-let keyA, keyD, keyAtk;
+let keyA, keyD, keyVis;
 
 class GameScene extends Phaser.Scene {
     constructor(test) {
@@ -11,20 +11,23 @@ class GameScene extends Phaser.Scene {
     }
 
     preload() {
-        this.load.image('bg', 'src/image/bg.jpg');
-        this.load.spritesheet('player', 'src/image/player.png', { frameWidth: 108, frameHeight: 136 });
+        this.load.image('bg', 'src/image/bg1.jpg');
+        this.load.spritesheet('player', 'src/image/player1.png', { frameWidth: 180, frameHeight: 247 });
     }
 
     create() {
         //BackG
-        bg = this.add.tileSprite(0, -320, 1920, 1080, 'bg').setDepth(1);
-        bg.setOrigin(0, 0);
+        bg = this.add.tileSprite(0, -100, 1980, 1080, 'bg')
+            .setDepth(1)
+            .setScale(0.8)
+            .setOrigin(0, 0);
 
         //Player
-        player = this.physics.add.sprite(50, 560, 'player')
+        player = this.physics.add.sprite(120, 570, 'player')
             .setDepth(10)
-            .setScale(1);
+            .setScale(0.8);
 
+        //Aims set
         this.anims.create({
             key: 'playerrun',
             frames: this.anims.generateFrameNumbers('player', {
@@ -38,28 +41,26 @@ class GameScene extends Phaser.Scene {
         //KEY
         keyA = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.A);
         keyD = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.D);
-        keyAtk = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
+        keyVis = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
         //wallblock
         player.setCollideWorldBounds(true);
     }
 
     update(delta, time) {
-        bg.tilePositionX += 2;
-        player.anims.play('playerrun', true);
-
+        bg.tilePositionX += 4;
+        //Key A D STOP
+        if (keyA.isDown) {player.setVelocityX(-180);}
+        else if (keyD.isDown) {player.setVelocityX(240);}
+        else {player.setVelocityX(0);}
         
-        if (keyA.isDown) {
-            player.setVelocityX(-250);
-        } else if (keyD.isDown) {
-            player.setVelocityX(250);
-        } else {
-            player.setVelocityX(0);
-        } if (keyAtk.isDown) {
-            player.setVisible();
-        } else if (keyAtk.isUp) {
-            player.setVisible(1);
-        }
-
+        //Anims
+        if (keyA.isDown) {player.anims.play('playerrun', true);}
+        else if (keyD.isDown) {player.anims.play('playerrun', true);}
+        else {player.anims.play('playerrun', false);}
+        
+        //Visible
+        if (keyVis.isDown) {player.setVisible();}
+        else if (keyVis.isUp) {player.setVisible(1);}
     }
 }
 export default GameScene;
