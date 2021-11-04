@@ -30,23 +30,13 @@ class GameScene extends Phaser.Scene {
     }
 
     create() {
-        bg = this.add.tileSprite(0,0,1920,1080,'bg').setOrigin(0,0).setDepth(1);
-        cloud1 = this.add.tileSprite(0,0,1920,1080,'cloud1').setOrigin(0,0).setDepth(2);
-        cloud2 = this.add.tileSprite(0,0,1920,1080,'cloud2').setOrigin(0,0).setDepth(3);
-        snow = this.add.tileSprite(0,0,1920,1080,'snow').setOrigin(0,0).setDepth(4);
+        bg = this.add.tileSprite(0,0,1920,1080,'bg').setOrigin(0,0).setDepth(1).setScale(0.67);
+        cloud1 = this.add.tileSprite(0,0,1920,1080,'cloud1').setOrigin(0,0).setDepth(2).setScale(0.67);
+        cloud2 = this.add.tileSprite(0,0,1920,1080,'cloud2').setOrigin(0,0).setDepth(3).setScale(0.67);
+        snow = this.add.tileSprite(0,0,1920,1080,'snow').setOrigin(0,0).setDepth(4).setScale(0.67);
       
-        queen = this.physics.add.sprite(150,810,'queen').setScale(0.8).setDepth(10);
-        this.anims.create({
-            key: 'queenAni',
-            frames: this.anims.generateFrameNumbers('queen', {
-                start: 0,
-                end: 38
-            }),
-            duration: 5000,
-            framerate: 10,
-            repeat: -1
-        })
-        
+        queen = this.physics.add.sprite(150,550,'queen').setScale(0.7).setDepth(10);
+    
         this.anims.create({
             key: 'queenAni2',
             frames: this.anims.generateFrameNumbers('queen', {
