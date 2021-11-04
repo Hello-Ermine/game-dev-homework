@@ -23,8 +23,8 @@ class GameScene extends Phaser.Scene {
     }
 
     create() {
-        bg = this.add.tileSprite(0, 0, 850, 1400, 'bg').setOrigin(0, 0).setDepth(1);
-        playerMan = this.physics.add.sprite(80, 550, 'playerMan').setScale(0.75).setDepth(2);
+        bg = this.add.tileSprite(0, -18, 1000, 780, 'bg').setScale(1.1).setOrigin(0, 0).setDepth(1);
+        playerMan = this.physics.add.sprite(80, 580, 'playerMan').setScale(0.75).setDepth(2);
         
         this.anims.create({
             key: 'playerManAni',
