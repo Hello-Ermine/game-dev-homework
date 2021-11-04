@@ -8,9 +8,12 @@ let keyA;
 let keyD;
 let keyX;
 let queen;
-let music;
+let theme;
 let keySb;
-let keyCaps;
+let keyCtrl;
+let jump;
+let bloop;
+let sparkle;
 
 
 class GameScene extends Phaser.Scene {
@@ -22,6 +25,9 @@ class GameScene extends Phaser.Scene {
 
     preload() {
         this.load.audio('theme','src/cookietheme.mp3');
+        this.load.audio('jump','src/jump.mp3');
+        this.load.audio('bloop','src/bell.mp3');
+        this.load.audio('sparkle','src/sparkle.mp3');
         this.load.image('bg','src/images/bg05.png');
         this.load.image('cloud1','src/images/layers/clouds_1.png');
         this.load.image('cloud2','src/images/layers/clouds_2.png');
@@ -36,10 +42,11 @@ class GameScene extends Phaser.Scene {
         bg = this.add.tileSprite(0,0,1920,1080,'bg').setOrigin(0,0).setDepth(1).setScale(0.67);
         cloud1 = this.add.tileSprite(0,0,1920,1080,'cloud1').setOrigin(0,0).setDepth(2).setScale(0.67);
         cloud2 = this.add.tileSprite(0,0,1920,1080,'cloud2').setOrigin(0,0).setDepth(3).setScale(0.67);
-        snow = this.add.tileSprite(0,0,1920,1080,'snow').setOrigin(0,0).setDepth(4).setScale(0.67);
+        snow = this.add.tileSprite(0,0,1920,1080,'snow').setOrigin(0,0).setDepth(5).setScale(0.67);
+        
       
-        queen = this.physics.add.sprite(150,520,'queen').setScale(0.7).setDepth(10);
-    
+        queen = this.physics.add.sprite(150,520,'queen').setScale(0.7).setDepth(10).setGravityY(1000);;
+       
         this.anims.create({
             key: 'queenAni2',
             frames: this.anims.generateFrameNumbers('queen', {
@@ -101,28 +108,48 @@ class GameScene extends Phaser.Scene {
         
         queen.setCollideWorldBounds(true);
 
-        music = this.sound.add('theme').setVolume(1);
+        theme = this.sound.add('theme').setVolume(0.2);
+        jump = this.sound.add('jump').setVolume(0.2);
+        bloop = this.sound.add('bloop').setVolume(0.2);
+        sparkle = this.sound.add('sparkle').setVolume(0.2);
 
-        music.play({loop: true});
+        theme.play({loop: true});
         
         keyA = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.A);
         keyD = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.D);
         keyX = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.X);
         keySb = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
-        keyCaps = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.CAPS_LOCK);
+        keyCtrl = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.CTRL);
     }
 
     update(delta, time) {
     
         
-        if (keyA.isDown) {
+        
+        if (keyX.isDown) {
+            sparkle.play({loop: false});
+            queen.anims.play('queenSleep', true,)
+        
+        }
+        else if (keySb.isDown) {
+           
+            jump.play({loop: false});
+            queen.anims.play('queenJump', true,)
+            queen.setVelocityY(-100);
+        
+        }
+        else if (keyCtrl.isDown) {
+            bloop.play({loop: false});
+            queen.anims.play('queenSlide', true,)
+            
+            
+        }
+        else if (keyA.isDown) {
             bg.tilePositionX -= 2;
             queen.setVelocityX(-200);
             queen.anims.play('queenDash', true);
             queen.flipX=true;
             
-        
-         
         }  else if (keyD.isDown) {
             bg.tilePositionX += 2;
             queen.setVelocityX(200);
@@ -130,18 +157,6 @@ class GameScene extends Phaser.Scene {
             queen.flipX=false;
             
         } 
-        else if (keyX.isDown) {
-            queen.anims.play('queenSleep', true,)
-        
-        }
-        else if (keySb.isDown) {
-            queen.anims.play('queenJump', true,)
-        
-        }
-        else if (keyCaps.isDown) {
-            queen.anims.play('queenSlide', true,)
-        
-        }
         else {
             queen.setVelocityX(0);
            
@@ -153,6 +168,7 @@ class GameScene extends Phaser.Scene {
         cloud1.tilePositionX -= 1;
         cloud2.tilePositionX -= 1;
         snow.tilePositionY -= 1;
+        
         
     }
 }

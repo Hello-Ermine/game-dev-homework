@@ -40,7 +40,7 @@ class MainMenu extends Phaser.Scene {
         this.scene.start('GameScene');
 
     })
-    music = this.sound.add('start').setVolume(1);
+    music = this.sound.add('start').setVolume(0.4);
     music.play({loop: false});
     }
 
