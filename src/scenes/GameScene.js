@@ -2,12 +2,11 @@ import Phaser from "phaser";
 
 let bg;
 let maple;
+let mushroom;
 
-let keyW;
 let keyA;
-let keyS;
 let keyD;
-
+let keyV;
 
 class GameScene extends Phaser.Scene {
     constructor(test) {
@@ -20,6 +19,9 @@ class GameScene extends Phaser.Scene {
         this.load.image('bg','src/image/background3.png');
         this.load.spritesheet('maple','src/image/playerMaple.png',
                                 {frameWidth:54, frameHeight:89});
+        this.load.spritesheet('mushroom', 'src/image/PoisonousMushroom2.png',
+                                {frameWidth:86, frameHeight:82});
+
 
 
     }
@@ -39,26 +41,39 @@ class GameScene extends Phaser.Scene {
             duration: 800,
             repeat: -1
         })
-        
+
         maple.setCollideWorldBounds(true)
+
+
+        mushroom = this.physics.add.sprite(800, 390, 'mushroom');
+        mushroom.setScale(1.1);
+        mushroom.setOffset(0,0);
+        mushroom.setImmovable();
+        this.anims.create({
+            key: 'mushroomAni',
+            frames: this.anims.generateFrameNumbers('mushroom',{
+                start: 0,
+                end: 4
+            }),
+            duration: 800,
+            repeat: -1
+        })
+        mushroom.setCollideWorldBounds(true)
+        this.physics.add.overlap(maple, mushroom);
         
-        keyW = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.W)
+        
         keyA = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.A)
-        keyS = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.S)
         keyD = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.D)
+        keyV = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.V)
+
     }
 
     update(delta, time) {
-        bg.tilePositionX += 5;
+        bg.tilePositionX += 4;
 
         maple.anims.play('mapleAni', true);
-        if(keyW.isDown){
-            maple.setVelocityY(-500);
-        }else if(keyS.isDown){
-            maple.setVelocityY(500);
-        }else{
-            maple.setVelocityY(0);
-        }
+        mushroom.anims.play('mushroomAni', true);
+
         if(keyA.isDown){
             maple.setVelocityX(-500);
         }else if(keyD.isDown){
@@ -67,7 +82,14 @@ class GameScene extends Phaser.Scene {
             maple.setVelocityX(0);
             
         }
-    
+
+        if(keyV.isDown){
+            maple.setVisible();
+        }else if(keyV.isUp){
+            maple.setVisible(1);
+        }
+
+        mushroom.setVelocityX(-200);
     }
 }
 export default GameScene;
