@@ -3,6 +3,8 @@ import Phaser from 'phaser';
 import GameScene from './scenes/GameScene';
 import MainMenu from './scenes/MainMenu';
 import GameOver from './scenes/GameOver';
+import Win from './scenes/Win';
+import Secret from './scenes/Secret';
 
 
 const config = {
@@ -16,13 +18,15 @@ const config = {
     physics: {
         default: 'arcade',
         arcade: {
-            debug: true
+            debug: false
         }
     },
     scene: [
         MainMenu,
         GameScene,
-        GameOver
+        GameOver,
+        Win,
+        Secret
     ],
     
     
