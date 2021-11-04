@@ -6,9 +6,11 @@ let cloud2;
 let snow;
 let keyA;
 let keyD;
+let keyX;
 let queen;
 let music;
-
+let keySb;
+let keyCaps;
 
 
 class GameScene extends Phaser.Scene {
@@ -19,12 +21,13 @@ class GameScene extends Phaser.Scene {
     }
 
     preload() {
-        this.load.audio('theme','src/themesong.mp3');
+        this.load.audio('theme','src/cookietheme.mp3');
         this.load.image('bg','src/images/bg05.png');
         this.load.image('cloud1','src/images/layers/clouds_1.png');
         this.load.image('cloud2','src/images/layers/clouds_2.png');
         this.load.image('snow','src/images/layers/snowfalling.png');
         this.load.spritesheet('queen','src/images/spritesheet (5).png',{frameWidth: 382, frameHeight : 382});
+        this.load.spritesheet('queen2','src/images/cookie1.png',{frameWidth: 382, frameHeight : 382});
 
     
     }
@@ -35,7 +38,7 @@ class GameScene extends Phaser.Scene {
         cloud2 = this.add.tileSprite(0,0,1920,1080,'cloud2').setOrigin(0,0).setDepth(3).setScale(0.67);
         snow = this.add.tileSprite(0,0,1920,1080,'snow').setOrigin(0,0).setDepth(4).setScale(0.67);
       
-        queen = this.physics.add.sprite(150,550,'queen').setScale(0.7).setDepth(10);
+        queen = this.physics.add.sprite(150,520,'queen').setScale(0.7).setDepth(10);
     
         this.anims.create({
             key: 'queenAni2',
@@ -46,6 +49,7 @@ class GameScene extends Phaser.Scene {
             duration: 1000,
             framerate: 10,
             repeat: -1
+            
         })
         this.anims.create({
             key: 'queenDash',
@@ -61,12 +65,39 @@ class GameScene extends Phaser.Scene {
             key: 'queenSleep',
             frames: this.anims.generateFrameNumbers('queen', {
                 start: 23,
-                end: 38
+                end: 36
             }),
             duration: 2000,
             framerate: 10,
-            repeat: -1
+            repeat: -1,
+            yoyo: true
+           
         })
+        this.anims.create({
+            key: 'queenJump',
+            frames: this.anims.generateFrameNumbers('queen2', {
+                start: 0,
+                end: 8
+            }),
+            duration: 1000,
+            framerate: 9,
+            repeat: 1,
+           
+        }) 
+        this.anims.create({
+            key: 'queenSlide',
+            frames: this.anims.generateFrameNumbers('queen2', {
+                start: 13,
+                end: 16
+            }),
+            duration: 500,
+            framerate: 4,
+            repeat: 1,
+           
+        }) 
+      
+      
+        
         
         queen.setCollideWorldBounds(true);
 
@@ -76,22 +107,41 @@ class GameScene extends Phaser.Scene {
         
         keyA = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.A);
         keyD = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.D);
+        keyX = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.X);
+        keySb = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
+        keyCaps = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.CAPS_LOCK);
     }
 
     update(delta, time) {
     
         
         if (keyA.isDown) {
+            bg.tilePositionX -= 2;
             queen.setVelocityX(-200);
+            queen.anims.play('queenDash', true);
+            queen.flipX=true;
             
-            queen.anims.play('queenSleep', true);
         
          
         }  else if (keyD.isDown) {
+            bg.tilePositionX += 2;
             queen.setVelocityX(200);
             queen.anims.play('queenDash', true);
-         
+            queen.flipX=false;
+            
         } 
+        else if (keyX.isDown) {
+            queen.anims.play('queenSleep', true,)
+        
+        }
+        else if (keySb.isDown) {
+            queen.anims.play('queenJump', true,)
+        
+        }
+        else if (keyCaps.isDown) {
+            queen.anims.play('queenSlide', true,)
+        
+        }
         else {
             queen.setVelocityX(0);
            
@@ -99,8 +149,7 @@ class GameScene extends Phaser.Scene {
            
         }
         
-
-        bg.tilePositionX += 2;
+        
         cloud1.tilePositionX -= 1;
         cloud2.tilePositionX -= 1;
         snow.tilePositionY -= 1;

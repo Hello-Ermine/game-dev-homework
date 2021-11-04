@@ -5,7 +5,7 @@ let bg;
 let cloud1;
 let cloud2;
 let snow;
-
+let music;
 
 
 class MainMenu extends Phaser.Scene {
@@ -16,7 +16,7 @@ class MainMenu extends Phaser.Scene {
     }
 
     preload() {
-
+        this.load.audio('start','src/start.mp3');
         this.load.image('play', 'src/images/playbutton1.png');
         this.load.image('cloud1','src/images/layers/clouds_1.png');
         this.load.image('cloud2','src/images/layers/clouds_2.png');
@@ -40,8 +40,8 @@ class MainMenu extends Phaser.Scene {
         this.scene.start('GameScene');
 
     })
-
-
+    music = this.sound.add('start').setVolume(1);
+    music.play({loop: false});
     }
 
     update(delta, time) {
