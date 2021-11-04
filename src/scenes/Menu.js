@@ -10,10 +10,8 @@ class Menu extends Phaser.Scene {
     }
 
     preload() {
+        //button
         this.load.image('start', 'src/image/start.png');
-
-
-
     }
 
     create() {
@@ -25,7 +23,6 @@ class Menu extends Phaser.Scene {
         button.on('pointerup', () => {
             this.scene.start('GameScene');
         })
-        
         button.on('pointerover', () => {
             button.setScale(0.12);
         })
@@ -36,8 +33,6 @@ class Menu extends Phaser.Scene {
     }
 
     update() {
-
-
 
     }
 }
