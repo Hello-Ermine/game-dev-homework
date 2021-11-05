@@ -44,18 +44,18 @@ class GameScene extends Phaser.Scene {
 
         //ควบคุม
         if(cursor.up.isDown){
-            player.setVelocityY(-500);
+            bird.setVelocityY(-500);
         }else if(cursor.down.isDown){
-            player.setVelocityY(500);
+            bird.setVelocityY(500);
         }else{
-            player.setVelocityY(0);
+            bird.setVelocityY(0);
         }
         if(cursor.left.isDown){
-            player.setVelocityX(-500);
+            bird.setVelocityX(-500);
         }else if(cursor.right.isDown){
-            player.setVelocityX(500);
+            bird.setVelocityX(500);
         }else{
-            player.setVelocityX(0);
+            bird.setVelocityX(0);
         }
     }
 }
