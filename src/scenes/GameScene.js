@@ -10,13 +10,13 @@ class GameScene extends Phaser.Scene {
     }
 
     preload() {
-        this.load.image('bg','image/BG.png');
+        this.load.image('bg','image/BACK.png');
         
 
     }
 
     create() {
-        bg = this.add.tileSprite(0,320,850,400,'bg').setOrigin(0,0);
+        bg = this.add.tileSprite(0,100,850,1400,'bg').setOrigin(0,0);
         
     }
 
