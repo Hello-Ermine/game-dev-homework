@@ -1,6 +1,7 @@
 import Phaser from "phaser";
 
 let bg;
+let player;
 
 class GameScene extends Phaser.Scene {
     constructor(test) {
@@ -14,8 +15,8 @@ class GameScene extends Phaser.Scene {
 
         this.load.image('bg', '../image/Bg.jpeg');
 
-       // this.load.spritesheet('bird','src/image/bird.png',
-        //{ frameWidth: 410 , frameHeight: 310});
+        this.load.spritesheet('player','../image/bird.png',
+        { frameWidth: 200 , frameHeight: 150});
         
 
     }
@@ -24,30 +25,41 @@ class GameScene extends Phaser.Scene {
 
         bg = this.add.tileSprite(0, 0, 850, 1400, 'bg').setOrigin(0, 0);
 
-
-
-
-    keyW_Atk = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.W);
-    keyA_Walkleft = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.A);
-    keyS = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.S);
-    keyD_Walkright = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.D)
-
+    //ควบคุม
+        cursor = this.input.keyboard.createCursorKeys();
 
     //animation
-        //this.anims.create({
-          //  key: 'birdAni',
-         //   frames: this.anims.generateFrameNumbers('bird', {
-         //       start: 0,
-         //       end: 7
-       //     }),
-       //     duration: 500,    
-       //     repeat: -1
+        this.anims.create({
+           key: 'birdfly',
+           frames: this.anims.generateFrameNumbers('bird', {
+           start: 0,
+           end: 4
+          }),
+           duration: 500,    
+           repeat: -1
         
+    })
     }
 
     update(delta, time) {
         background.tilePositionX -= 10;
         
+
+        //ควบคุม
+        if(cursor.up.isDown){
+            player.setVelocityY(-500);
+        }else if(cursor.down.isDown){
+            player.setVelocityY(500);
+        }else{
+            player.setVelocityY(0);
+        }
+        if(cursor.left.isDown){
+            player.setVelocityX(-500);
+        }else if(cursor.right.isDown){
+            player.setVelocityX(500);
+        }else{
+            player.setVelocityX(0);
+        }
     }
 }
 export default GameScene;
