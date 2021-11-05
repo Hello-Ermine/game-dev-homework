@@ -12,7 +12,7 @@ class GameScene extends Phaser.Scene {
     preload() {
 
 
-        this.load.image('bg', 'src/image/Bg.jpeg');
+        this.load.image('bg', '../src/image/Bg.jpeg');
 
        // this.load.spritesheet('bird','src/image/bird.png',
         //{ frameWidth: 410 , frameHeight: 310});
@@ -22,7 +22,15 @@ class GameScene extends Phaser.Scene {
 
     create() {
 
-        background = this.add.tileSprite(0, 0, 850, 1400, 'bg').setOrigin(0, 0);
+        bg = this.add.tileSprite(0, 0, 298, 254, 'bg').setOrigin(0, 0);
+
+
+
+
+    keyW_Atk = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.W);
+    keyA_Walkleft = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.A);
+    keyS = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.S);
+    keyD_Walkright = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.D)
 
 
     //animation
