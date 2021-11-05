@@ -38,7 +38,7 @@ class GameScene extends Phaser.Scene {
     }
 
     update(delta, time) {
-        background.tilePositionY -= 10;
+        background.tilePositionX += 1;
         
     }
 }
