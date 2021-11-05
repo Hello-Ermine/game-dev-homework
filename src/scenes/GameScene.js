@@ -20,7 +20,8 @@ class GameScene extends Phaser.Scene {
     create() {
 
         bg = this.add.tileSprite(0, 0, 850, 1400, 'bg').setOrigin(0, 0).setDepth(2);
-        bird = this.physics.add.sprite(500, 200,'bird');
+
+        bird = this.physics.add.sprite(600, 150,'bird');
         bird.setScale(0.5).setDepth(5).setCollideWorldBounds(true);
         bird.anims.play('birdfly', true);
     //ควบคุม
