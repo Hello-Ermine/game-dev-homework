@@ -16,7 +16,7 @@ class MainMenu extends Phaser.Scene {
     }
 
     preload() {
-        this.load.audio('start','src/start.mp3');
+        this.load.audio('start','src/sound/start.mp3');
         this.load.image('play', 'src/images/playbutton1.png');
         this.load.image('cloud1','src/images/layers/clouds_1.png');
         this.load.image('cloud2','src/images/layers/clouds_2.png');
