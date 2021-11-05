@@ -2,6 +2,7 @@ import Phaser from "phaser";
 
 let bg;
 let player;
+let music;
 
 let keyW;
 let keyA;
@@ -20,12 +21,19 @@ class GameScene extends Phaser.Scene {
 
         this.load.spritesheet('player','image/UTwalk.png',
         { frameWidth: 68 , frameHeight: 74});
+
+
+
+        this.load.audio('ost_game', ['ost/deltarune_chapter_2_ost_spamton_battle_-778026409569618682.mp3']);
         
 
     }
 
     create() {
         bg = this.add.tileSprite(0,80,850,1400,'bg').setOrigin(0,0);
+
+        music = this.add.audio('ost_game');
+        music.play();
 
         player = this.physics.add.sprite(425, 700, 'player').setScale(1.5);
 
