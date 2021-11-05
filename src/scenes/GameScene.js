@@ -12,9 +12,9 @@ class GameScene extends Phaser.Scene {
         });
     }
     preload() {
-        this.load.image('bg', '../image/bg.jpg');
+        this.load.image('bg', 'src/image/bg.jpg');
         
-        this.load.spritesheet('bird','../image/bird.png',
+        this.load.spritesheet('bird','src/image/bird.png',
         { frameWidth: 150 , frameHeight: 150});
     }
 

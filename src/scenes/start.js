@@ -11,8 +11,8 @@ class start extends Phaser.Scene {
 
     preload() {
         //button
-        this.stage.backgroundColor = '#F0F8FF';
-        this.load.image('start', '../image/start.png');
+        //this.stage.backgroundColor = '#F0F8FF';
+        this.load.image('start', 'src/image/start.png');
     }
 
     create() {
@@ -38,4 +38,4 @@ class start extends Phaser.Scene {
     }
 }
 
-export default Menu;
+export default start;
