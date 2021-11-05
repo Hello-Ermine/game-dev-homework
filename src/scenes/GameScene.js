@@ -18,7 +18,7 @@ class GameScene extends Phaser.Scene {
     preload() {
         this.load.image('bg','image/UTBG.png');
 
-        this.load.spritesheet('player','image/walk.png',
+        this.load.spritesheet('player','image/UTwalk.png',
         { frameWidth: 68 , frameHeight: 74});
         
 
@@ -27,7 +27,7 @@ class GameScene extends Phaser.Scene {
     create() {
         bg = this.add.tileSprite(0,80,850,1400,'bg').setOrigin(0,0);
 
-        player = this.physics.add.sprite(425, 700, 'player').setScale(3);
+        player = this.physics.add.sprite(425, 700, 'player').setScale(1.5);
 
         this.anims.create({
             key: 'playerAni',
@@ -49,7 +49,7 @@ class GameScene extends Phaser.Scene {
         
     }
     update(delta, time) {
-        bg.tilePositionX +=2;
+        bg.tilePositionX +=2.5;
 
         player.anims.play('playerAni', true);
 
