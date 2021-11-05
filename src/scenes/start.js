@@ -11,7 +11,7 @@ class start extends Phaser.Scene {
 
     preload() {
         //button
-        this.load.image('start', 'src/image/start.png');
+        this.load.image('start', '../image/start.png');
     }
 
     create() {

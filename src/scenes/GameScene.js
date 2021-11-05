@@ -14,8 +14,8 @@ class GameScene extends Phaser.Scene {
     preload() {
 
 
-        this.load.image('bg', '../image/Bg.jpeg');
-
+        this.load.image('bg', '../image/bg.jpg');
+        
         this.load.spritesheet('bird','../image/bird.png',
         { frameWidth: 200 , frameHeight: 150});
         
@@ -24,11 +24,12 @@ class GameScene extends Phaser.Scene {
 
     create() {
 
-        bg = this.add.tileSprite(0, 0, 850, 1400, 'bg').setOrigin(0, 0);
-        bird.anims.play('birdfly', true);
+        bg = this.add.tileSprite(0, 0, 850, 1400, 'bg').setOrigin(0, 0).setDepth(2);
+       
 
-        bird = this.physics.add.sprite(600,150,'bird');
-        bird.setScale(0.5).setDepth(5).setCollideWorldBounds(true)
+        bird = this.physics.add.sprite(500, 200,'bird');
+        bird.setScale(0.5).setDepth(5).setCollideWorldBounds(true);
+        bird.anims.play('birdfly', true);
     //ควบคุม
         cursor = this.input.keyboard.createCursorKeys();
 
@@ -51,18 +52,18 @@ class GameScene extends Phaser.Scene {
 
         //ควบคุม
         if(cursor.up.isDown){
-            bird.setVelocityY(-500);
+            player.setVelocityY(-500);
         }else if(cursor.down.isDown){
-            bird.setVelocityY(500);
+            player.setVelocityY(500);
         }else{
-            bird.setVelocityY(0);
+            player.setVelocityY(0);
         }
         if(cursor.left.isDown){
-            bird.setVelocityX(-500);
+            player.setVelocityX(-500);
         }else if(cursor.right.isDown){
-            bird.setVelocityX(500);
+            player.setVelocityX(500);
         }else{
-            bird.setVelocityX(0);
+            player.setVelocityX(0);
         }
     }
 }
