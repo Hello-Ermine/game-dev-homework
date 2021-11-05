@@ -11,6 +11,7 @@ class start extends Phaser.Scene {
 
     preload() {
         //button
+        this.stage.backgroundColor = '#F0F8FF';
         this.load.image('start', '../image/start.png');
     }
 

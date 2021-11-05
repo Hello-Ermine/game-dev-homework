@@ -1,4 +1,5 @@
 import Phaser from "phaser";
+import { BaseSoundManager } from "phaser/src/sound";
 
 let bg;
 let bird;
@@ -14,22 +15,23 @@ class GameScene extends Phaser.Scene {
         this.load.image('bg', '../image/bg.jpg');
         
         this.load.spritesheet('bird','../image/bird.png',
-        { frameWidth: 200 , frameHeight: 150});
+        { frameWidth: 150 , frameHeight: 150});
     }
 
     create() {
 
-        bg = this.add.tileSprite(0, 0, 850, 1400, 'bg').setOrigin(0, 0).setDepth(2);
+        bg = this.add.tileSprite(0, 0, 850, 1400, 'bg');
+        bg.setOrigin(0, 0).setDepth(2);
 
         bird = this.physics.add.sprite(600, 150,'bird');
-        bird.setScale(0.5).setDepth(5).setCollideWorldBounds(true);
-        bird.anims.play('birdfly', true);
+        bird.setScale(1).setDepth(5).setCollideWorldBounds(true);
+        
     //ควบคุม
         cursor = this.input.keyboard.createCursorKeys();
 
     //animation
         this.anims.create({
-           key: 'birdfly',
+           key: 'birdAni',
            frames: this.anims.generateFrameNumbers('bird', {
            start: 0,
            end: 4
@@ -39,8 +41,10 @@ class GameScene extends Phaser.Scene {
     })
     }
     update(delta, time) {
-        background.tilePositionX -= 10;
-        
+        bg.tilePositionX += 2;
+
+        bird.anims.play('birdAni', true);
+
 
         //ควบคุม
         if(cursor.up.isDown){
