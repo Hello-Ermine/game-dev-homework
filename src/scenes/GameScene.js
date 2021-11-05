@@ -18,8 +18,8 @@ class GameScene extends Phaser.Scene {
     preload() {
         this.load.image('bg','image/UTBG.png');
 
-        this.load.spritesheet('player','image/kris_walking.png',
-        { frameWidth: 49 , frameHeight: 37});
+        this.load.spritesheet('player','image/walk.png',
+        { frameWidth: 68 , frameHeight: 74});
         
 
     }
@@ -35,7 +35,7 @@ class GameScene extends Phaser.Scene {
                 start: 0,
                 end: 8
             }),
-            duration: 600,    
+            duration: 650,    
             repeat: -1
         })
 
