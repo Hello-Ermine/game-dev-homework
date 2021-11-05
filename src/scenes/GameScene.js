@@ -10,23 +10,16 @@ class GameScene extends Phaser.Scene {
             key: 'GameScene'
         });
     }
-
     preload() {
-
-
         this.load.image('bg', '../image/bg.jpg');
         
         this.load.spritesheet('bird','../image/bird.png',
         { frameWidth: 200 , frameHeight: 150});
-        
-
     }
 
     create() {
 
         bg = this.add.tileSprite(0, 0, 850, 1400, 'bg').setOrigin(0, 0).setDepth(2);
-       
-
         bird = this.physics.add.sprite(500, 200,'bird');
         bird.setScale(0.5).setDepth(5).setCollideWorldBounds(true);
         bird.anims.play('birdfly', true);
@@ -41,11 +34,9 @@ class GameScene extends Phaser.Scene {
            end: 4
           }),
            duration: 500,    
-           repeat: -1
-        
+           repeat: -1      
     })
     }
-
     update(delta, time) {
         background.tilePositionX -= 10;
         
