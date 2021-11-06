@@ -4,6 +4,7 @@ let bg;
 let player;
 let wall;
 let music;
+let running;
 
 let keyW;
 let keyA;
@@ -28,6 +29,7 @@ class GameScene extends Phaser.Scene {
         this.load.audio('music', ['ost/deltarune_chapter_2_ost_spamton_battle_-778026409569618682.mp3',
         'ost/deltarune_chapter_2_ost_spamton_battle_-778026409569618682.ogg',
         'ost/deltarune_chapter_2_ost_spamton_battle_-778026409569618682.wav']);
+        this.load.audio('running', ['ost/undertale_sound_effect_flee_-6642979242629476696.mp3']);
 
 
     }
@@ -71,6 +73,9 @@ class GameScene extends Phaser.Scene {
 
     music = this.sound.add('music').setVolume(0.2);
     music.play({loop: true});
+
+    running = this.sound.add('running').setVolume(0.2);
+    running.play({loop: true});
 
     
 
