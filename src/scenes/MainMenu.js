@@ -3,6 +3,7 @@ import Phaser from "phaser";
 let menuza;
 let startbutton;
 let menumusic;
+let menutheme;
 
 class MainMenu extends Phaser.Scene {
     constructor(test) {
@@ -26,6 +27,10 @@ class MainMenu extends Phaser.Scene {
 
         this.load.audio('menusound',['ost/soundnae.mp3']);
 
+        this.load.audio('menuark',['ost/soundnae.mp3']);
+
+        this.load.audio('menunak',['ost/menumusic.mp3']);
+
     }
 
     create() {
@@ -45,6 +50,16 @@ class MainMenu extends Phaser.Scene {
         menumusic = this.sound.add('menusound').setVolume(0.2);
         menumusic.play({loop: false});
 
+        menutheme = this.sound.add('menunak').setVolume(0.1);
+        delay: 1000;
+        menutheme.play({loop: true});
+
+        if(true){
+            menumusic.play({loop: false});
+            delay: 5000;
+            menutheme.play({loop: true});
+        }
+
         this.add.image(200,250,'delta').setScale(0.7);
 
         this.add.image(600,250,'rush').setScale(0.7);
@@ -55,6 +70,7 @@ class MainMenu extends Phaser.Scene {
         startbutton.setInteractive();
         startbutton.on('pointerup',()=>{
             this.scene.start('GameScene');
+            menutheme.stop();
             
             
         });
