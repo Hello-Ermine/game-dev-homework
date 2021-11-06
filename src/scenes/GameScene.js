@@ -5,6 +5,7 @@ let player;
 let wall;
 let music;
 let running;
+let playButton;
 
 let profile;
 let menu
@@ -30,6 +31,8 @@ class GameScene extends Phaser.Scene {
 
         this.load.image('wall','image/ThinkingPug.png');
 
+        this.load.image('sound','image/download (1).png');
+
         this.load.spritesheet('player','image/UTwalk.png',
         { frameWidth: 68 , frameHeight: 74});
 
@@ -52,11 +55,7 @@ class GameScene extends Phaser.Scene {
         .setVisible()
         .setImmovable();
 
-        
-
         player = this.physics.add.sprite(200, 450, 'player').setScale(1.5);
-
-        
 
         this.anims.create({
             key: 'playerAni',
@@ -67,6 +66,8 @@ class GameScene extends Phaser.Scene {
             duration: 650,    
             repeat: -1
         })
+
+        playButton = this.add.image(350, 50, 'sound').setScale(0.8)
 
 
 
