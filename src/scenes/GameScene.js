@@ -24,10 +24,10 @@ class GameScene extends Phaser.Scene {
     }
 
     preload() {
-        this.load.audio('theme','src/sound/ookietheme.mp3');
-        this.load.audio('jump','src/sound/jump.mp3');
-        this.load.audio('bloop','src/sound/ell.mp3');
-        this.load.audio('sparkle','src/sound/sparkle.mp3');
+        this.load.audio('theme','src/sounds/ookietheme.mp3');
+        this.load.audio('jump','src/sounds/jump.mp3');
+        this.load.audio('bloop','src/sounds/bell.mp3');
+        this.load.audio('sparkle','src/sounds/sparkle.mp3');
         this.load.image('bg','src/images/bg05.png');
         this.load.image('cloud1','src/images/layers/clouds_1.png');
         this.load.image('cloud2','src/images/layers/clouds_2.png');
