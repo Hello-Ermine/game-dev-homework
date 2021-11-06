@@ -1,20 +1,25 @@
 import Phaser from "phaser";
 
-let GameOver;
+let gameOver;
+let memeSound;
 
-class MainMenu extends Phaser.Scene{
+class GameOver extends Phaser.Scene{
     constructor(test){
         super({
             key: 'GameOver'
         });
     }
     preload(){
-        this.load.image('GameOver', 'src/image/gameover.jpg');
+        this.load.image('gameOver', 'src/image/gameover.jpg');
+        this.load.audio('memeSong', 'src/memesong.mp3');
     }
     
     create(){
-        GameOver = this.add.image(200,200,'GameOver').setScale(1);
+        gameOver = this.add.image(250,100,'gameOver').setScale(0.5).setOrigin(0,0)
         
+        
+        memeSound = this.sound.add('memeSong').setVolume(0.5);
+        memeSound.play({loop:true});
     }
 
     update(delta, time){

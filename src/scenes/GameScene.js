@@ -78,7 +78,7 @@ class GameScene extends Phaser.Scene {
                 start: 0,
                 end: 2
             }),
-            duration: 3000,
+            duration: 4000,
             repeat: -1
         })
 
@@ -88,7 +88,7 @@ class GameScene extends Phaser.Scene {
                 start: 0,
                 end: 2
             }),
-            duration: 3000,
+            duration: 4000,
             repeat: -1
         })
 
@@ -100,7 +100,7 @@ class GameScene extends Phaser.Scene {
                 start: 0,
                 end: 1
             }),
-            duration: 10,
+            duration: 220,
             repeat: -1
         })
 
@@ -127,21 +127,23 @@ class GameScene extends Phaser.Scene {
         })
         mushroom.setCollideWorldBounds(true)
         
-        // this.physics.add.collider(maple, mushroom,  ()=>{     //ยังแข็งแกร่งไม่พอ
-        //     music.stop();  //หยุดเพลง
-        //     this.scene.start('GameOver');  //เปลี่ยน Scene
-        // });
+        this.physics.add.collider(maple, mushroom,  ()=>{     //ยังแข็งแกร่งไม่พอ
+        music.stop();  //หยุดเพลง
+        this.scene.start('GameOver');  //เปลี่ยน Scene
+        });
         
         keyA = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.A)
         keyD = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.D)
         keyV = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.V)
         keyK = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.K)
 
-        music = this.sound.add('themesong').setVolume(0.1); // เพลง JOJO
-        music.play({loop: true}) // ลูปเพลง
+        
 
         soundInvis = this.sound.add('soundInvis').setVolume(0.2); // เสียงล่องหน
         soundFist = this.sound.add('soundFist').setVolume(0.5);//เสียงต่อย
+
+        music = this.sound.add('themesong').setVolume(0.1); // เพลง JOJO
+        music.play({loop: true}) // ลูปเพลง
         
     }
 
@@ -175,24 +177,19 @@ class GameScene extends Phaser.Scene {
 
         if(keyK.isDown){
             maple.anims.play('mapleFist', true);
-            soundFist.play();
             maple.setVelocityX(0);
-
+            soundFist.play();
         }else if(keyA.isDown){
             maple.anims.play('mapleWalkLeftAni', true);
-            bg.tilePositionX -= 2;
-            // เห็ดวิ่ง
-            mushroom.setVelocityX(-20);
-        
+            bg.tilePositionX -= 2;        
         }else if(keyD.isDown){
             maple.anims.play('mapleAni', true);
             bg.tilePositionX += 2;
-            mushroom.setVelocityX(-20); // เห็ดวิ่ง
         }else{
             maple.anims.play('maplestandAni', true);
         }
 
-        
+        mushroom.setVelocityX(-20);// เห็ดวิ่ง
     }
 }
 export default GameScene;
