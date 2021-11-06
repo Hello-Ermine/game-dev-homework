@@ -24,7 +24,7 @@ class GameScene extends Phaser.Scene {
 
 
 
-        this.load.audio('ost_game', ['ost/deltarune_chapter_2_ost_spamton_battle_-778026409569618682.mp3']);
+        
         
 
     }
@@ -32,8 +32,7 @@ class GameScene extends Phaser.Scene {
     create() {
         bg = this.add.tileSprite(0,80,850,1400,'bg').setOrigin(0,0);
 
-        music = this.add.audio('ost_game');
-        music.play();
+        
 
         player = this.physics.add.sprite(425, 700, 'player').setScale(1.5);
 
@@ -54,10 +53,12 @@ class GameScene extends Phaser.Scene {
     keyA = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.A);
     keyS = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.S);
     keyD = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.D);
+
+    player.setCollideWorldBounds(true) 
         
     }
     update(delta, time) {
-        bg.tilePositionX +=2.5;
+        bg.tilePositionX +=2;
 
         player.anims.play('playerAni', true);
 
