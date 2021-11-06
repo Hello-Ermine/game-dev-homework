@@ -50,11 +50,11 @@ class GameScene extends Phaser.Scene {
     objMeteor = this.physics.add.group();
 
     meteorEvent = this.time.addEvent({
-        delay: 1000,
+        delay: 100,
         callback : function(){
             meteor = this.physics.add.image(Phaser.Math.Between(100,350), 0, 'meteor')
              .setScale(0.1)
-             .setVelocityY(200);
+             .setVelocityY(500);
             //objMeteor.add(meteor).setVelocityY(200);
 
             this.physics.add.collider(plane, meteor, meteorDestroy);
