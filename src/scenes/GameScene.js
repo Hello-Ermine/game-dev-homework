@@ -7,9 +7,10 @@ let music;
 let running;
 let soundButton;
 let menuButton;
+let cross;
 
 let profile;
-let menu
+let menu;
 
 let keyW;
 let keyA;
@@ -35,6 +36,7 @@ class GameScene extends Phaser.Scene {
         this.load.image('exit','image/menubutton.png');
 
         this.load.image('sound','image/soundbutton.png');
+        this.load.image('cross','image/cross.png');
 
         this.load.spritesheet('player','image/UTwalk.png',
         { frameWidth: 68 , frameHeight: 74});
@@ -52,6 +54,8 @@ class GameScene extends Phaser.Scene {
 
         profile = this.add.image(150,50,'kris').setScale(0.6);
         menu = this.add.image(650,50,'menu').setScale(0.6);
+
+        cross = this.add.image(410, 100, 'cross').setScale(0.2);
 
         wall = this.physics.add.image(400,-230,'wall')
         .setScale(2)
