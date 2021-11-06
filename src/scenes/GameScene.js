@@ -25,7 +25,7 @@ class GameScene extends Phaser.Scene {
         this.load.spritesheet('player','image/UTwalk.png',
         { frameWidth: 68 , frameHeight: 74});
 
-        this.load.audio('ding', ['ost/deltarune_chapter_2_ost_spamton_battle_-778026409569618682.mp3',
+        this.load.audio('music', ['ost/deltarune_chapter_2_ost_spamton_battle_-778026409569618682.mp3',
         'ost/deltarune_chapter_2_ost_spamton_battle_-778026409569618682.ogg',
         'ost/deltarune_chapter_2_ost_spamton_battle_-778026409569618682.wav']);
 
@@ -41,8 +41,7 @@ class GameScene extends Phaser.Scene {
 
         player = this.physics.add.sprite(425, 700, 'player').setScale(1.5);
 
-        music = this.add.audio('ding');
-        music.play('',0,1,true);
+        
 
         this.anims.create({
             key: 'playerAni',
@@ -64,7 +63,14 @@ class GameScene extends Phaser.Scene {
 
     player.setCollideWorldBounds(true) 
 
+
+    
     this.physics.add.collider(player, wall);
+
+
+
+    music = this.sound.add('music').setVolume(0.2);
+    music.play({loop: true});
 
     
 
