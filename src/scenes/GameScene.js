@@ -75,7 +75,13 @@ class GameScene extends Phaser.Scene {
             repeat: -1
         })
 
-        
+        music = this.sound.add('music').setVolume(0.2);
+        music.play({loop: true});
+
+        running = this.sound.add('running').setVolume(0.2);
+        running.play({loop: true});
+
+
         soundButton = this.add.image(410, 100, 'sound').setScale(0.2).setDepth(1);
         soundButton.setInteractive();
         soundButton.on('pointerup',()=>{
@@ -86,9 +92,18 @@ class GameScene extends Phaser.Scene {
                 this.sound.mute = false;
                 cross.setVisible(false);
             }             
-        }) 
+        })
+        
+        
 
         menuButton = this.add.image(410, 50, 'exit').setScale(0.3);
+        menuButton.setInteractive();
+        menuButton.on('pointerup',()=>{
+            this.scene.start('MainMenu');
+            music.stop(); 
+            running.stop();          
+        })
+        
 
 
 
@@ -97,24 +112,12 @@ class GameScene extends Phaser.Scene {
     keyA = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.A);
     keyS = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.S);
     keyD = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.D);
+    
 
     player.setCollideWorldBounds(true) 
-
-
-    
     this.physics.add.collider(player, wall);
 
-
-
-    music = this.sound.add('music').setVolume(0.2);
-    music.play({loop: true});
-
-    running = this.sound.add('running').setVolume(0.2);
-    running.play({loop: true});
-
     
-
-        
     }
     update(delta, time) {
         bg.tilePositionX +=2;

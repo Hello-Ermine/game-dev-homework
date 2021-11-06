@@ -1,6 +1,6 @@
 import Phaser from "phaser";
 
-let menu;
+let menuza;
 let startbutton;
 
 class MainMenu extends Phaser.Scene {
@@ -12,7 +12,7 @@ class MainMenu extends Phaser.Scene {
 
     preload() {
 
-        this.load.spritesheet('menu','image/Menunaja.png',
+        this.load.spritesheet('menunaja','image/Menunaja.png',
         { frameWidth: 680 , frameHeight: 553});
 
         this.load.image('delta','image/delta.png');
@@ -27,11 +27,11 @@ class MainMenu extends Phaser.Scene {
 
     create() {
 
-        menu = this.physics.add.sprite(400, 361, 'menu').setScale(1.3);
+        menuza = this.physics.add.sprite(400, 361, 'menunaja').setScale(1.3);
 
         this.anims.create({
             key: 'menuAni',
-            frames: this.anims.generateFrameNumbers('menu', {
+            frames: this.anims.generateFrameNumbers('menunaja', {
                 start: 0,
                 end: 4
             }),
@@ -46,8 +46,10 @@ class MainMenu extends Phaser.Scene {
         this.add.image(395,250,'soul').setScale(0.1);
 
         startbutton = this.add.image(395,400,'start').setScale(0.75);
-        soundButton.setInteractive();
-        soundButton.on('pointerup',()=>{
+        startbutton.setInteractive();
+        startbutton.on('pointerup',()=>{
+            this.scene.start('GameScene');
+            
             
         });
     
@@ -56,7 +58,7 @@ class MainMenu extends Phaser.Scene {
     }
     update(delta, time) {
 
-        menu.anims.play('menuAni', true);
+        menuza.anims.play('menuAni', true);
        
 
         
