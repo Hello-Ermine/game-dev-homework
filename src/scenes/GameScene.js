@@ -6,6 +6,9 @@ let wall;
 let music;
 let running;
 
+let profile;
+let menu
+
 let keyW;
 let keyA;
 let keyS;
@@ -20,6 +23,10 @@ class GameScene extends Phaser.Scene {
 
     preload() {
         this.load.image('bg','image/UTBG.png');
+
+        this.load.image('kris','image/profile.png');
+
+        this.load.image('menu','image/menu.png');
 
         this.load.image('wall','image/ThinkingPug.png');
 
@@ -36,6 +43,9 @@ class GameScene extends Phaser.Scene {
 
     create() {
         bg = this.add.tileSprite(0,80,850,1400,'bg').setOrigin(0,0);
+
+        profile = this.add.image(150,50,'kris').setScale(0.6);
+        menu = this.add.image(650,50,'menu').setScale(0.6);
 
         wall = this.physics.add.image(400,-230,'wall')
         .setScale(2)
@@ -74,10 +84,10 @@ class GameScene extends Phaser.Scene {
 
 
 
-    music = this.sound.add('music').setVolume(0.3);
+    music = this.sound.add('music').setVolume(0.0);
     music.play({loop: true});
 
-    running = this.sound.add('running').setVolume(0.2);
+    running = this.sound.add('running').setVolume(0.0);
     running.play({loop: true});
 
     
