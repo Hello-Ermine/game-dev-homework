@@ -7,10 +7,15 @@ let meteor;
 let meteorEvent;
 let objMeteor;
 
+let bullet;
+let objBullet;
+let eventBullet;
+
 let keyW;
 let keyA;
 let keyS;
 let keyD;
+let keySpace;
 
 
 class GameScene extends Phaser.Scene {
@@ -25,7 +30,9 @@ class GameScene extends Phaser.Scene {
         this.load.image('BG', 'src/image/BG2.jpg');
         this.load.spritesheet('plane', 'src/image/plane.png',
             { frameWidth: 189.2, frameHeight: 185.2 });
+        this.load.image('bullet' , 'src/image/bullet.png');
         this.load.image('meteor' ,'src/image/meteor.png');
+
     }
 
 
@@ -56,6 +63,8 @@ class GameScene extends Phaser.Scene {
             loop: true
         });
 
+    objBullet = this.physics.add.group();
+
         function meteorDestroy(r, s) {
             s.destroy();
         }
@@ -78,7 +87,7 @@ class GameScene extends Phaser.Scene {
         keyA = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.A);
         keyS = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.S);
         keyD = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.D);
-
+        keySpace = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
     }
 
     update(delta, time) {
@@ -97,9 +106,16 @@ class GameScene extends Phaser.Scene {
         }else{
             plane.setVelocityX(0);
         }
+
         for (let i = 0; i < objMeteor.getChildren().length; i++) {
             if (objMeteor.getChildren()[i].y <= -50) {
                 objMeteor.getChildren()[i].destroy();
+            }
+        }
+
+        for (let i = 0; i < objBullet.getChildren().length; i++) {
+            if (objBullet.getChildren()[i].y <= 0) {
+                objBullet.getChildren()[i].destroy();
             }
         }
     }
