@@ -2,7 +2,7 @@ import Phaser from "phaser";
 
 let bg;
 let player;
-let music;
+let wall;
 
 let keyW;
 let keyA;
@@ -19,20 +19,18 @@ class GameScene extends Phaser.Scene {
     preload() {
         this.load.image('bg','image/UTBG.png');
 
+        this.load.image('wall','image/ThinkingPug.png');
+
         this.load.spritesheet('player','image/UTwalk.png',
         { frameWidth: 68 , frameHeight: 74});
 
-
-
-        
-        
 
     }
 
     create() {
         bg = this.add.tileSprite(0,80,850,1400,'bg').setOrigin(0,0);
 
-        
+        wall = this.add.image(200,10,'wall').setImmovable();
 
         player = this.physics.add.sprite(425, 700, 'player').setScale(1.5);
 
@@ -55,6 +53,11 @@ class GameScene extends Phaser.Scene {
     keyD = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.D);
 
     player.setCollideWorldBounds(true) 
+
+    this.physics.add.collider(player, wall, ()=>{}
+    );
+
+
         
     }
     update(delta, time) {
