@@ -35,6 +35,8 @@ class MainMenu extends Phaser.Scene {
 
     create() {
 
+        this.sound.mute = false;
+
         menuza = this.physics.add.sprite(400, 361, 'menunaja').setScale(1.3);
 
         this.anims.create({
