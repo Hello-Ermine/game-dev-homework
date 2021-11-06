@@ -2,6 +2,7 @@ import Phaser from "phaser";
 
 let menuza;
 let startbutton;
+let menumusic;
 
 class MainMenu extends Phaser.Scene {
     constructor(test) {
@@ -23,6 +24,8 @@ class MainMenu extends Phaser.Scene {
         
         this.load.image('start','image/bigshot.png');
 
+        this.load.audio('menusound',['ost/Desktop-2021.11.06-11.27.49.01.mp3']);
+
     }
 
     create() {
@@ -38,6 +41,9 @@ class MainMenu extends Phaser.Scene {
             duration: 500,    
             repeat: -1
         })
+
+        menumusic = this.sound.add('menusound').setVolume(0.2);
+        menumusic.play({loop: false});
 
         this.add.image(200,250,'delta').setScale(0.7);
 
