@@ -56,8 +56,8 @@ class GameScene extends Phaser.Scene {
             loop: true
         });
 
-        function meteorDestroy(plane, meteor) {
-            meteor.destroy();
+        function meteorDestroy(r, s) {
+            s.destroy();
         }
 
     this.anims.create({
