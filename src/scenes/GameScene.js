@@ -17,19 +17,20 @@ class GameScene extends Phaser.Scene {
     }
 
     preload() {
-        this.load.image('BG', 'src/image/BG.png');
+        //this.load.image('BG', 'src/image/BG.png');
+        this.load.image('BG', 'src/image/BG2.jpg');
         this.load.spritesheet('plane', 'src/image/plane.png',
             { frameWidth: 189.2, frameHeight: 185.2 });
     }
 
 
     create() {
-    BG = this.add.tileSprite(0, 0, 200, 500, 'BG');
+    BG = this.add.tileSprite(0, 0, 500, 800, 'BG');
     BG.setOrigin(0, 0);
-    BG.setScale(3);
+    BG.setScale(1);
 
     plane = this.physics.add.sprite(240, 600, 'plane');
-    plane.setScale(0.6);
+    plane.setScale(0.8);
 
     plane.setCollideWorldBounds(true)  
 
@@ -55,18 +56,18 @@ class GameScene extends Phaser.Scene {
     }
 
     update(delta, time) {
-        BG.tilePositionY -= 2;
+        BG.tilePositionY -= 0.8;
         if(keyW.isDown){
-            plane.setVelocityY(-500);
+            plane.setVelocityY(-300);
         }else if(keyS.isDown){
-            plane.setVelocityY(500);
+            plane.setVelocityY(300);
         }else{
             plane.setVelocityY(0);
         }
         if(keyA.isDown){
-            plane.setVelocityX(-500);
+            plane.setVelocityX(-300);
         }else if(keyD.isDown){
-            plane.setVelocityX(500);
+            plane.setVelocityX(300);
         }else{
             plane.setVelocityX(0);
         }
