@@ -63,8 +63,6 @@ class GameScene extends Phaser.Scene {
             loop: true
         });
 
-    objBullet = this.physics.add.group();
-
         function meteorDestroy(r, s) {
             s.destroy();
         }
@@ -86,9 +84,7 @@ class GameScene extends Phaser.Scene {
         keyW = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.W);
         keyA = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.A);
         keyS = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.S);
-        keyD = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.D);
-        keySpace = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
-    }
+        keyD = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.D);    }
 
     update(delta, time) {
         BG.tilePositionY -= 0.8;
@@ -110,12 +106,6 @@ class GameScene extends Phaser.Scene {
         for (let i = 0; i < objMeteor.getChildren().length; i++) {
             if (objMeteor.getChildren()[i].y <= -50) {
                 objMeteor.getChildren()[i].destroy();
-            }
-        }
-
-        for (let i = 0; i < objBullet.getChildren().length; i++) {
-            if (objBullet.getChildren()[i].y <= 0) {
-                objBullet.getChildren()[i].destroy();
             }
         }
     }
