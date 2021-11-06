@@ -30,7 +30,9 @@ class GameScene extends Phaser.Scene {
     create() {
         bg = this.add.tileSprite(0,80,850,1400,'bg').setOrigin(0,0);
 
-        wall = this.add.image(200,10,'wall').setImmovable();
+        wall = this.physics.add.image(200,10,'wall')
+        .setVisible()
+        .setImmovable();
 
         player = this.physics.add.sprite(425, 700, 'player').setScale(1.5);
 
@@ -54,8 +56,7 @@ class GameScene extends Phaser.Scene {
 
     player.setCollideWorldBounds(true) 
 
-    this.physics.add.collider(player, wall, ()=>{}
-    );
+    this.physics.add.collider(player, wall);
 
 
         
