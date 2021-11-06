@@ -24,7 +24,7 @@ class MainMenu extends Phaser.Scene {
         
         this.load.image('start','image/bigshot.png');
 
-        this.load.audio('menusound',['ost/Desktop-2021.11.06-11.27.49.01.mp3']);
+        this.load.audio('menusound',['ost/soundnae.mp3']);
 
     }
 
