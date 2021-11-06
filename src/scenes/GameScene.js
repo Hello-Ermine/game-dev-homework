@@ -29,7 +29,7 @@ class GameScene extends Phaser.Scene {
         this.load.audio('music', ['ost/deltarune_chapter_2_ost_spamton_battle_-778026409569618682.mp3',
         'ost/deltarune_chapter_2_ost_spamton_battle_-778026409569618682.ogg',
         'ost/deltarune_chapter_2_ost_spamton_battle_-778026409569618682.wav']);
-        this.load.audio('running', ['ost/newer.mp3']);
+        this.load.audio('running', ['ost/superrun.mp3']);
 
 
     }
