@@ -73,7 +73,7 @@ class GameScene extends Phaser.Scene {
         
 
         this.anims.create({
-            key: 'maplestandAni',
+            key: 'mapleStandAni',
             frames: this.anims.generateFrameNumbers('playerStand',{
                 start: 0,
                 end: 2
@@ -100,7 +100,7 @@ class GameScene extends Phaser.Scene {
                 start: 0,
                 end: 1
             }),
-            duration: 220,
+            duration: 300,
             repeat: -1
         })
 
@@ -128,7 +128,7 @@ class GameScene extends Phaser.Scene {
         mushroom.setCollideWorldBounds(true)
         
         this.physics.add.collider(maple, mushroom,  ()=>{     //ยังแข็งแกร่งไม่พอ
-        music.stop();  //หยุดเพลง
+        music.stop();//หยุดเพลง  
         this.scene.start('GameOver');  //เปลี่ยน Scene
         });
         
@@ -151,7 +151,7 @@ class GameScene extends Phaser.Scene {
         
 
         mushroom.anims.play('mushroomAni', true);
-
+        mushroom.setVelocityX(-20);// เห็ดวิ่ง
         
 
         if(keyA.isDown){
@@ -166,30 +166,28 @@ class GameScene extends Phaser.Scene {
 
         if(keyV.isDown){
             maple.setVisible();
-            this.physics.add.overlap(maple, mushroom);
+        
+
         }else if(keyV.isUp){
             maple.setVisible(1);
             soundInvis.play();
             
         }
-
     
-
         if(keyK.isDown){
             maple.anims.play('mapleFist', true);
             maple.setVelocityX(0);
             soundFist.play();
         }else if(keyA.isDown){
             maple.anims.play('mapleWalkLeftAni', true);
-            bg.tilePositionX -= 2;        
+            bg.tilePositionX -= 2; 
+                   
         }else if(keyD.isDown){
             maple.anims.play('mapleAni', true);
             bg.tilePositionX += 2;
-        }else{
-            maple.anims.play('maplestandAni', true);
-        }
 
-        mushroom.setVelocityX(-20);// เห็ดวิ่ง
+        }else
+            maple.anims.play('mapleStandAni', true);
     }
 }
 export default GameScene;
