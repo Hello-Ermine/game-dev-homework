@@ -5,7 +5,8 @@ let player;
 let wall;
 let music;
 let running;
-let playButton;
+let soundButton;
+let menuButton;
 
 let profile;
 let menu
@@ -31,7 +32,9 @@ class GameScene extends Phaser.Scene {
 
         this.load.image('wall','image/ThinkingPug.png');
 
-        this.load.image('sound','image/download (1).png');
+        this.load.image('exit','image/menubutton.png');
+
+        this.load.image('sound','image/soundbutton.png');
 
         this.load.spritesheet('player','image/UTwalk.png',
         { frameWidth: 68 , frameHeight: 74});
@@ -67,7 +70,18 @@ class GameScene extends Phaser.Scene {
             repeat: -1
         })
 
-        playButton = this.add.image(350, 50, 'sound').setScale(0.8)
+        
+        soundButton = this.add.image(410, 100, 'sound').setScale(0.2);
+        soundButton.setInteractive();
+        soundButton.on('pointerup',()=>{
+            if(!this.sound.mute){
+                this.sound.mute = true;
+            }else{
+                this.sound.mute = false;
+            }             
+        }) 
+
+        menuButton = this.add.image(410, 50, 'exit').setScale(0.3);
 
 
 
@@ -85,10 +99,10 @@ class GameScene extends Phaser.Scene {
 
 
 
-    music = this.sound.add('music').setVolume(0.0);
+    music = this.sound.add('music').setVolume(0.3);
     music.play({loop: true});
 
-    running = this.sound.add('running').setVolume(0.0);
+    running = this.sound.add('running').setVolume(0.2);
     running.play({loop: true});
 
     
