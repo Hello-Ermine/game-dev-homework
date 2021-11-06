@@ -55,7 +55,8 @@ class GameScene extends Phaser.Scene {
         profile = this.add.image(150,50,'kris').setScale(0.6);
         menu = this.add.image(650,50,'menu').setScale(0.6);
 
-        cross = this.add.image(410, 100, 'cross').setScale(0.2);
+        cross = this.add.image(408, 100, 'cross').setScale(0.05).setDepth(2);
+        cross.setVisible(false);
 
         wall = this.physics.add.image(400,-230,'wall')
         .setScale(2)
@@ -75,13 +76,15 @@ class GameScene extends Phaser.Scene {
         })
 
         
-        soundButton = this.add.image(410, 100, 'sound').setScale(0.2);
+        soundButton = this.add.image(410, 100, 'sound').setScale(0.2).setDepth(1);
         soundButton.setInteractive();
         soundButton.on('pointerup',()=>{
             if(!this.sound.mute){
                 this.sound.mute = true;
+                cross.setVisible(true);
             }else{
                 this.sound.mute = false;
+                cross.setVisible(false);
             }             
         }) 
 
