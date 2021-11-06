@@ -29,7 +29,7 @@ class GameScene extends Phaser.Scene {
         this.load.audio('music', ['ost/deltarune_chapter_2_ost_spamton_battle_-778026409569618682.mp3',
         'ost/deltarune_chapter_2_ost_spamton_battle_-778026409569618682.ogg',
         'ost/deltarune_chapter_2_ost_spamton_battle_-778026409569618682.wav']);
-        this.load.audio('running', ['ost/superrun.mp3']);
+        this.load.audio('running', ['ost/run2.mp3']);
 
 
     }
@@ -37,11 +37,14 @@ class GameScene extends Phaser.Scene {
     create() {
         bg = this.add.tileSprite(0,80,850,1400,'bg').setOrigin(0,0);
 
-        wall = this.physics.add.image(200,10,'wall')
+        wall = this.physics.add.image(400,-230,'wall')
+        .setScale(2)
         .setVisible()
         .setImmovable();
 
-        player = this.physics.add.sprite(425, 700, 'player').setScale(1.5);
+        
+
+        player = this.physics.add.sprite(200, 450, 'player').setScale(1.5);
 
         
 
@@ -71,8 +74,8 @@ class GameScene extends Phaser.Scene {
 
 
 
-    // music = this.sound.add('music').setVolume(0.2);
-    // music.play({loop: true});
+    music = this.sound.add('music').setVolume(0.3);
+    music.play({loop: true});
 
     running = this.sound.add('running').setVolume(0.2);
     running.play({loop: true});
