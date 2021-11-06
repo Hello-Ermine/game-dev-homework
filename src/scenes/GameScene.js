@@ -2,9 +2,10 @@ import Phaser from "phaser";
 
 let bg;
 let tenis;
+let keyW;
 let keyA;
 let keyD;
-let keyX;
+let keyS;
 
 class GameScene extends Phaser.Scene {
     constructor(test) {
