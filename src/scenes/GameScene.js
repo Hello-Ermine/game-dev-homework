@@ -69,7 +69,7 @@ class GameScene extends Phaser.Scene {
             key: 'playerAni',
             frames: this.anims.generateFrameNumbers('player', {
                 start: 0,
-                end: 8
+                end: 9
             }),
             duration: 650,    
             repeat: -1
@@ -106,7 +106,7 @@ class GameScene extends Phaser.Scene {
 
 
 
-    music = this.sound.add('music').setVolume(0.3);
+    music = this.sound.add('music').setVolume(0.2);
     music.play({loop: true});
 
     running = this.sound.add('running').setVolume(0.2);
