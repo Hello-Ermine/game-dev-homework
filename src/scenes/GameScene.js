@@ -11,6 +11,11 @@ let keyA;
 let keyS;
 let keyD;
 
+//bullet
+let bulletGroup;
+let bullet;
+let bulletEvent;
+
 class GameScene extends Phaser.Scene {
     constructor(test) {
         super({
@@ -25,12 +30,15 @@ class GameScene extends Phaser.Scene {
         //charactor
         this.load.spritesheet('frog', 'src/image/frog.png',
             { frameWidth: 231, frameHeight: 373 });
+
+        //bullet
+        this.load.image('bullet', 'src/image/bullet.png');
     }
 
     create() {
-        bg = this.add.tileSprite(-100, 0, 1920, 1080, 'bg')
-            .setScale(0.68)
-            .setOrigin(0, 0);
+        // bg = this.add.tileSprite(-100, 0, 1920, 1080, 'bg')
+        //     .setScale(0.68)
+        //     .setOrigin(0, 0);
 
         goodfrog = this.physics.add.sprite(225, 500, 'frog')
             .setScale(0.45)
@@ -53,10 +61,33 @@ class GameScene extends Phaser.Scene {
         keyS = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.S);
         keyD = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.D);
 
+
+        //bullet
+        bulletGroup = this.physics.add.group();
+
+        bulletEvent = this.time.addEvent({
+            delay: 1000,
+            callback: function () {
+                bullet = this.physics.add.image(goodfrog.x, goodfrog.y-110, 'bullet')
+                    .setScale(0.2);
+
+                bulletGroup.add(bullet);
+
+                bulletGroup.setVelocityY(-200);
+            },
+            callbackScope: this,
+            loop: true,
+            // pause: false
+        });
+
+
+
+
+
     }
 
     update(delta, time) {
-        bg.tilePositionY -= 10;
+        // bg.tilePositionY -= 10;
 
         goodfrog.anims.play('frogAni', true);
 
@@ -73,6 +104,12 @@ class GameScene extends Phaser.Scene {
             goodfrog.setVelocityX(500);
         } else {
             goodfrog.setVelocityX(0);
+        }
+
+        for (let i = 0; i < bulletGroup.getChildren().length; i++) {
+            if (bulletGroup.getChildren()[i].y < -100) {
+                bulletGroup.getChildren()[i].destroy();
+            }
         }
 
     }
