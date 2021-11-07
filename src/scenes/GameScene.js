@@ -1,7 +1,7 @@
 import Phaser from "phaser";
 
 let bg;
-let tenis;
+let player;
 let keyW;
 let keyA;
 let keyD;
@@ -15,28 +15,57 @@ class GameScene extends Phaser.Scene {
     }
 
     preload() {
-         this.load.image('bg', 'src/image/Game_Background.jpg');
-         this.load.spritesheet('tenis', 'src/image/tenis.png',
-            { frameWidth: 100, frameHeight: 100 });  
+        //backGround
+         this.load.image('bg', 'src/image/bg.png');
+        //player 
+         this.load.spritesheet('player', 'src/image/P2.png',
+            { frameWidth: 79.6666667, frameHeight: 111 });  
+        //dragon
+         this.load.image('dragon', 'src/image/dragon.png')    
 
     }
 
     create() {
         
-
+        background = this.add.tileSprite(0, 0, 1088, 416, 'bg').setOrigin(0, 0);
         
-
-
-        tenis = this.physics.add.sprite(225, 500, 'tenis')
-            .setScale(0.45)
-            .setCollideWorldBounds(true);
-            bg.tilePositionX -= 10;
-            tenis = this.physics.add.sprite(150,520,'tenis').setScale(0.7).setDepth(10).setGravityY(900);;
+        //player
+        player = this.physics.add.sprite(425, 700, 'player').setScale(0.5).setCollideWorldBounds(true);;
+    
+    this.anims.create({
+        key: 'playerAni',
+        frames: this.anims.generateFrameNumbers('player', {
+            start: 0,
+            end: 5
+        }),
+        duration: 500,
+        framerate: 0,
+        repeat: -1
+    })
+        //tenis
+        // tenis = this.physics.add.sprite(225, 500, 'tenis')
+        //     .setScale(0.45)
+        //     .setCollideWorldBounds(true);
+        //     bg.tilePositionX -= 10;
+        //     tenis = this.physics.add.sprite(150,520,'tenis').setScale(0.7).setDepth(10).setGravityY(900);;
            
-            bg.tilePositionY -= 10;
-             goodfrog.anims.play('tenisAni', true);    
+        //     bg.tilePositionY -= 10;
+        //      player.anims.play('tenisAni', true);    
 
-            
+          //dragon
+        //   bulletGroup = this.physics.add.group();
+
+        //   bulletEvent = this.time.addEvent({
+        //       delay: 1000,
+        //       callback: function () {
+        //           bullet = this.physics.add.image(goodfrog.x, goodfrog.x-90, 'bullet').setScale(0.2);
+        //             bulletGroup.add(bullet);
+  
+        //           bulletGroup.setVelocityY(-200);
+        //       },
+        //       callbackScope: this,
+        //       loop: true,
+        //     });
 
             
 
@@ -49,26 +78,24 @@ class GameScene extends Phaser.Scene {
 
     update(delta, time) {
         bg.tilePositionX -= 10;
-        tenis = this.physics.add.sprite(150,520,'tenis').setScale(0.7).setDepth(10).setGravityY(900);;
-       
-        bg.tilePositionY -= 10;
-         goodfrog.anims.play('tenisAni', true);
 
-        tp.anims.play('tpAni', true);
+        //player
+         player.anims.play('playerAni', true);
+
 
         if (keyW.isDown) {
-            tenis.setVelocityY(-500);
+            player.setVelocityY(-250);
         } else if (keyS.isDown) {
-           tenis.setVelocityY(500);
+           player.setVelocityY(250);
         } else {
-           tenis.setVelocityY(0);
+           player.setVelocityY(0);
         }
         if (keyA.isDown) {
-           tenis.setVelocityX(-500);
+           player.setVelocityX(-250);
         } else if (keyD.isDown) {
-           tenis.setVelocityX(500);
+           player.setVelocityX(250);
         } else {
-           tenis.setVelocityX(0);
+           player.setVelocityX(0);
         }
 
     
