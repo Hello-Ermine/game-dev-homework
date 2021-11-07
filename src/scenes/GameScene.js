@@ -6,6 +6,11 @@ let keyW;
 let keyA;
 let keyD;
 let keyS;
+let dragonGroup;
+let dragonEvent;
+let bullet;
+let bulletGroup;
+let bullEvent;
 
 class GameScene extends Phaser.Scene {
     constructor(test) {
@@ -21,7 +26,9 @@ class GameScene extends Phaser.Scene {
          this.load.spritesheet('player', 'src/image/P2.png',
             { frameWidth: 79.6666667, frameHeight: 111 });  
         //dragon
-         this.load.image('dragon', 'src/image/dragon.png')    
+         this.load.image('dragon', 'src/image/dragon.png') 
+        //bullet
+         this.load.image('bullet', 'src/image/')    
 
     }
 
@@ -30,42 +37,52 @@ class GameScene extends Phaser.Scene {
         background = this.add.tileSprite(0, 0, 1088, 416, 'bg').setOrigin(0, 0);
         
         //player
-        player = this.physics.add.sprite(425, 700, 'player').setScale(0.5).setCollideWorldBounds(true);;
+        player = this.physics.add.sprite(80, 100, 'player').setScale(0.5).setCollideWorldBounds(true).setImmovable();
     
-    this.anims.create({
-        key: 'playerAni',
-        frames: this.anims.generateFrameNumbers('player', {
-            start: 0,
-            end: 5
-        }),
-        duration: 500,
-        framerate: 0,
-        repeat: -1
-    })
-        //tenis
-        // tenis = this.physics.add.sprite(225, 500, 'tenis')
-        //     .setScale(0.45)
-        //     .setCollideWorldBounds(true);
-        //     bg.tilePositionX -= 10;
-        //     tenis = this.physics.add.sprite(150,520,'tenis').setScale(0.7).setDepth(10).setGravityY(900);;
+        this.anims.create({
+            key: 'playerAni',
+            frames: this.anims.generateFrameNumbers('player', {
+                start: 0,
+                end: 5
+            }),
+            duration: 500,
+            framerate: 0,
+            repeat: -1
+        })
            
-        //     bg.tilePositionY -= 10;
-        //      player.anims.play('tenisAni', true);    
 
           //dragon
-        //   bulletGroup = this.physics.add.group();
+           dragonGroup = this.physics.add.group();
 
-        //   bulletEvent = this.time.addEvent({
-        //       delay: 1000,
-        //       callback: function () {
-        //           bullet = this.physics.add.image(goodfrog.x, goodfrog.x-90, 'bullet').setScale(0.2);
-        //             bulletGroup.add(bullet);
+           dragonEvent = this.time.addEvent({
+               delay: 3000,
+               callback: function () {
+                   dragon = this.physics.add.image(dragon.x-90, dragon.y, 'dragon');
+                     dragonGroup.add(dragon);
   
-        //           bulletGroup.setVelocityY(-200);
-        //       },
-        //       callbackScope: this,
-        //       loop: true,
-        //     });
+                   dragonGroup.setVelocityX(-100);
+               },
+               callbackScope: this,
+               loop: true,
+               paused: false,
+             });
+
+           //bullet
+           bulletGroup = this.physics.add.group();
+
+           bulletEvent = this.time.addEvent({
+              delay: 1000,
+              callback: function () {
+                  bullet = this.physics.add.image(player.x-120, player.y, 'bullet')
+                      .setScale(0.2).setSize(0.2);
+
+                  bulletGroup.add(bullet);
+                  bulletGroup.setVelocityX(-100);
+                },
+              callbackScope: this,
+              loop: true,
+            // pause: false
+        });
 
             
 
@@ -98,18 +115,23 @@ class GameScene extends Phaser.Scene {
            player.setVelocityX(0);
         }
 
-    
-        
+        //dragon destroy
+        for (let i = 0; i < dragonGroup.getChildren().length; i++) {
+            if (dragonGroup.getChildren()[i].x < -1000) {
+                dragonGroup.getChildren()[i].destroy();
+            }
+        }
       
-      
+        for (let i = 0; i < bulletGroup.getChildren().length; i++) {
+            if (bulletGroup.getChildren()[i].x <= 2000) {
+                bulletGroup.getChildren()[i].destroy();
+            }
+        }
         
         
         
         
-        keyA = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.A);
-        keyD = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.D);
-        keyX = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.X);
-        keySb = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
+        
     }
 
     
