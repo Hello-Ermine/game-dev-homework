@@ -34,12 +34,12 @@ class GameScene extends Phaser.Scene {
     //ควบคุม
         cursor = this.input.keyboard.createCursorKeys();
 
+    //event
         heartGroup = this.physics.add.group();
-
         heartEvent = this.time.addEvent({
             delay: 1000,
             callback: function () {
-                heart = this.physics.add.image(200, 150, 'heart')
+                heart = this.physics.add.image(-200, 300, 'heart')
                     .setScale(1);
 
                     heartGroup.add(heart);
