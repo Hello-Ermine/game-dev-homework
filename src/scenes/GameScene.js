@@ -12,7 +12,7 @@ class GameScene extends Phaser.Scene {
         });
     }
     preload() {
-        this.load.image('bg', 'src/image/bg.jpg');
+        this.load.image('bg', 'src/image/newbg.jpg');
         
         this.load.spritesheet('bird','src/image/bird.png',
         { frameWidth: 150 , frameHeight: 150});
@@ -20,7 +20,7 @@ class GameScene extends Phaser.Scene {
 
     create() {
 
-        bg = this.add.tileSprite(0, -30, 850, 1400, 'bg');
+        bg = this.add.tileSprite(0, -500, 850, 1400, 'bg');
         bg.setOrigin(0, 0).setDepth(2);
 
         bird = this.physics.add.sprite(600, 150,'bird');
