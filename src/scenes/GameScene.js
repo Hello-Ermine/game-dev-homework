@@ -4,6 +4,9 @@ import { BaseSoundManager } from "phaser/src/sound";
 let bg;
 let bird;
 let cursor;
+let heart;
+let heartEvent;
+let heartGroup;
 
 class GameScene extends Phaser.Scene {
     constructor(test) {
@@ -16,6 +19,8 @@ class GameScene extends Phaser.Scene {
         
         this.load.spritesheet('bird','src/image/bird.png',
         { frameWidth: 150 , frameHeight: 150});
+
+        this.load.image('heart', 'src/image/heart.png');
     }
 
     create() {
@@ -29,6 +34,22 @@ class GameScene extends Phaser.Scene {
     //ควบคุม
         cursor = this.input.keyboard.createCursorKeys();
 
+        heartGroup = this.physics.add.group();
+
+        heartEvent = this.time.addEvent({
+            delay: 500,
+            callback: function () {
+                heart = this.physics.add.image(bird.x, bird.y, 'heart')
+                    .setScale(0.3);
+
+                    heartGroup.add(heart);
+
+                bulletGroup.setVelocityX(200);
+            },
+            callbackScope: this,
+            loop: true,
+            // pause: false
+        });
     //animation
         this.anims.create({
            key: 'birdAni',
@@ -61,6 +82,13 @@ class GameScene extends Phaser.Scene {
         }else{
             bird.setVelocityX(0);
         }
+         for (let i = 0; i < heartGroup.getChildren().length; i++) {
+         if (heartGroup.getChildren()[i].x < 100) {
+            heartGroup.getChildren()[i].destroy();
+         }
+    
+
+    
     }
 }
 export default GameScene;
