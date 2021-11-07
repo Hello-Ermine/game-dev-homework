@@ -28,7 +28,7 @@ class GameScene extends Phaser.Scene {
         bg = this.add.tileSprite(0, -500, 850, 1400, 'bg');
         bg.setOrigin(0, 0).setDepth(2);
 
-        bird = this.physics.add.sprite(600, 150,'bird');
+        bird = this.physics.add.sprite(-200, 300,'bird');
         bird.setScale(1).setDepth(5).setCollideWorldBounds(true);
         
     //ควบคุม
@@ -37,18 +37,20 @@ class GameScene extends Phaser.Scene {
         heartGroup = this.physics.add.group();
 
         heartEvent = this.time.addEvent({
-            delay: 500,
+            delay: 1000,
             callback: function () {
-                heart = this.physics.add.image(bird.x, bird.y, 'heart')
-                    .setScale(0.3);
+                heart = this.physics.add.image(200, 150, 'heart')
+                    .setScale(1);
 
                     heartGroup.add(heart);
 
-                bulletGroup.setVelocityX(200);
+                heartGroup.setVelocityX(200);
             },
             callbackScope: this,
-            loop: true,
-            // pause: false
+            loop: flase,
+            startAt: 1000,
+             timeScale: 1,
+             repeat: 10
         });
     //animation
         this.anims.create({
@@ -88,7 +90,7 @@ class GameScene extends Phaser.Scene {
          }
     
 
-    
+        }
     }
 }
 export default GameScene;
