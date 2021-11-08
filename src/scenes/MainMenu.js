@@ -13,7 +13,6 @@ class MainMenu extends Phaser.Scene {
     preload() {
         this.load.image('bg', 'src/image/MainMenu.jpg');
         this.load.image('button', 'src/image/Botton.png');
-
     }
 
 

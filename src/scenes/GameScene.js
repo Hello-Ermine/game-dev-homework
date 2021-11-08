@@ -49,13 +49,17 @@ class GameScene extends Phaser.Scene {
     
     objMeteor = this.physics.add.group();
 
+    objBullet = this.physics.add.group();
+
     meteorEvent = this.time.addEvent({
-        delay: 100,
+        delay: 500,
         callback : function(){
             meteor = this.physics.add.image(Phaser.Math.Between(100,350), 0, 'meteor')
              .setScale(0.1)
-             .setVelocityY(500);
-            //objMeteor.add(meteor).setVelocityY(200);
+             .setVelocityY(300);
+
+             objMeteor.add(meteor).setVelocityY(200);
+            //objMeteor.add(meteor)
 
             this.physics.add.collider(plane, meteor, meteorDestroy);
         },
@@ -63,7 +67,7 @@ class GameScene extends Phaser.Scene {
             loop: true
         });
 
-        function meteorDestroy(r, s) {
+        function meteorDestroy(r,s) {
             s.destroy();
         }
 
@@ -84,7 +88,9 @@ class GameScene extends Phaser.Scene {
         keyW = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.W);
         keyA = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.A);
         keyS = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.S);
-        keyD = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.D);    }
+        keyD = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.D);    
+        keySpace = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
+    }
 
     update(delta, time) {
         BG.tilePositionY -= 0.8;
@@ -103,9 +109,29 @@ class GameScene extends Phaser.Scene {
             plane.setVelocityX(0);
         }
 
+        if(Phaser.Input.Keyboard.JustDown(keySpace)){
+            bullet = this.physics.add.image(plane.x, plane.y-50, 'bullet');
+            bullet.setScale(0.1);
+            bullet.setOffset(100,100);
+
+            objBullet.add(bullet)
+            .setVelocityY(-200);
+
+            this.physics.add.overlap(objBullet, meteor, ()=> {
+                meteor.destroy()
+                bullet.destroy()
+            });
+        }
+
         for (let i = 0; i < objMeteor.getChildren().length; i++) {
             if (objMeteor.getChildren()[i].y <= -50) {
                 objMeteor.getChildren()[i].destroy();
+            }
+        }
+
+        for (let i = 0; i < objBullet.getChildren().length; i++) {
+            if (objBullet.getChildren()[i].y <= 0) {
+                objBullet.getChildren()[i].destroy();
             }
         }
     }
