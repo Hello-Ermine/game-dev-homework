@@ -3,6 +3,7 @@ import Phaser from "phaser";
 let bg;
 let cloud1;
 let cloud2;
+let block;
 let snow;
 let keyA;
 let keyD;
@@ -32,6 +33,7 @@ class GameScene extends Phaser.Scene {
         this.load.image('cloud1','src/images/layers/clouds_1.png');
         this.load.image('cloud2','src/images/layers/clouds_2.png');
         this.load.image('snow','src/images/layers/snowfalling.png');
+        
         this.load.spritesheet('queen','src/images/spritesheet (5).png',{frameWidth: 382, frameHeight : 382});
         this.load.spritesheet('queen2','src/images/cookie1.png',{frameWidth: 382, frameHeight : 382});
 
@@ -40,9 +42,10 @@ class GameScene extends Phaser.Scene {
 
     create() {
         bg = this.add.tileSprite(0,0,1920,1080,'bg').setOrigin(0,0).setDepth(1).setScale(0.67);
-        cloud1 = this.add.tileSprite(0,0,1920,1080,'cloud1').setOrigin(0,0).setDepth(2).setScale(0.67);
-        cloud2 = this.add.tileSprite(0,0,1920,1080,'cloud2').setOrigin(0,0).setDepth(3).setScale(0.67);
+        cloud1 = this.add.tileSprite(0,0,1920,1080,'cloud1').setOrigin(0,0).setDepth(3).setScale(0.67);
+        cloud2 = this.add.tileSprite(0,0,1920,1080,'cloud2').setOrigin(0,0).setDepth(4).setScale(0.67);
         snow = this.add.tileSprite(0,0,1920,1080,'snow').setOrigin(0,0).setDepth(5).setScale(0.67);
+        
         
       
         queen = this.physics.add.sprite(150,520,'queen').setScale(0.7).setDepth(10).setGravityY(1000);;
@@ -76,7 +79,7 @@ class GameScene extends Phaser.Scene {
             }),
             duration: 2000,
             framerate: 10,
-            repeat: -1,
+            repeat: 0,
             yoyo: true
            
         })
@@ -120,56 +123,56 @@ class GameScene extends Phaser.Scene {
         keyX = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.X);
         keySb = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
         keyCtrl = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.CTRL);
+      
     }
-
-    update(delta, time) {
+        update(delta, time) {
     
-        
-        
-        if (keyX.isDown) {
-            sparkle.play({loop: false});
-            queen.anims.play('queenSleep', true,)
-        
+       
+        if (Phaser.Input.Keyboard.JustDown(keySb)) {
+            jump.play({loop: false});
         }
         else if (keySb.isDown) {
-           
-            jump.play({loop: false});
+            
             queen.anims.play('queenJump', true,)
+            
+            
             queen.setVelocityY(-100);
         
         }
-        else if (keyCtrl.isDown) {
+        else if (Phaser.Input.Keyboard.JustDown(keyCtrl)) {
             bloop.play({loop: false});
-            queen.anims.play('queenSlide', true,)
-            
-            
         }
-        else if (keyA.isDown) {
-            bg.tilePositionX -= 2;
-            queen.setVelocityX(-200);
-            queen.anims.play('queenDash', true);
-            queen.flipX=true;
+        else if (keyCtrl.isDown) {
             
-        }  else if (keyD.isDown) {
-            bg.tilePositionX += 2;
-            queen.setVelocityX(200);
-            queen.anims.play('queenDash', true);
-            queen.flipX=false;
-            
-        } 
-        else {
-            queen.setVelocityX(0);
+            queen.anims.play('queenSlide', true,)
            
+      
+        }else if (Phaser.Input.Keyboard.JustDown(keyX)) {
+
+        sparkle.play({loop: false});
+
+
+        }else if (keyX.isDown) {
+            
+            queen.anims.play('queenSleep', true,)
+            
+
+            
+
+        }else{
+            
+
            queen.anims.play('queenAni2', true);
            
         }
         
-        
         cloud1.tilePositionX -= 1;
         cloud2.tilePositionX -= 1;
         snow.tilePositionY -= 1;
+        bg.tilePositionX += 2;
         
         
     }
 }
+
 export default GameScene;
