@@ -5,6 +5,7 @@ let cloud1;
 let cloud2;
 let block;
 let snow;
+let ground;
 let keyA;
 let keyD;
 let keyX;
@@ -30,6 +31,7 @@ class GameScene extends Phaser.Scene {
         this.load.audio('bloop','src/sounds/bell.mp3');
         this.load.audio('sparkle','src/sounds/sparkle.mp3');
         this.load.image('bg','src/images/bg05.png');
+        this.load.image('ground','src/images/layers/ground.png');
         this.load.image('cloud1','src/images/layers/clouds_1.png');
         this.load.image('cloud2','src/images/layers/clouds_2.png');
         this.load.image('snow','src/images/layers/snowfalling.png');
@@ -42,13 +44,14 @@ class GameScene extends Phaser.Scene {
 
     create() {
         bg = this.add.tileSprite(0,0,1920,1080,'bg').setOrigin(0,0).setDepth(1).setScale(0.67);
+        ground = this.physics.add.image(500,1200,'ground').setDepth(2).setSize(1920,0).setScale(1).setOffset(0,0).setImmovable().setVisible();
         cloud1 = this.add.tileSprite(0,0,1920,1080,'cloud1').setOrigin(0,0).setDepth(3).setScale(0.67);
         cloud2 = this.add.tileSprite(0,0,1920,1080,'cloud2').setOrigin(0,0).setDepth(4).setScale(0.67);
         snow = this.add.tileSprite(0,0,1920,1080,'snow').setOrigin(0,0).setDepth(5).setScale(0.67);
         
         
       
-        queen = this.physics.add.sprite(150,520,'queen').setScale(0.7).setDepth(10).setGravityY(1000);;
+        queen = this.physics.add.sprite(150,400,'queen').setScale(0.7).setDepth(10).setSize(250,168).setOffset(40,210).setGravityY(1000);
        
         this.anims.create({
             key: 'queenAni2',
@@ -110,7 +113,7 @@ class GameScene extends Phaser.Scene {
         
         
         queen.setCollideWorldBounds(true);
-
+        this.physics.add.collider(queen, ground);
         theme = this.sound.add('theme').setVolume(0.2);
         jump = this.sound.add('jump').setVolume(0.2);
         bloop = this.sound.add('bloop').setVolume(0.2);
